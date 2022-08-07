@@ -1,11 +1,13 @@
 use serenity::prelude::*;
 
-use handler::Handler;
+use discord_interactions_handler::DiscordInteractionsHandler;
 
 mod secret;
-mod handler;
+mod discord_interactions_handler;
 mod useful;
 mod interaction_with_minecraft_server;
+mod mcserver_handler;
+mod discord_user_custom_permissions;
 
 #[tokio::main]
 async fn main() {
@@ -21,7 +23,7 @@ async fn main() {
     // automatically prepend your bot token with "Bot ", which is a requirement
     // by Discord for bot users.
     let mut client =
-        Client::builder(&token, intents).event_handler(Handler::new()).await.expect("Err creating client");
+        Client::builder(&token, intents).event_handler(DiscordInteractionsHandler::new()).await.expect("Err creating client");
 
     // Finally, start a single shard, and start listening to events.
     //
